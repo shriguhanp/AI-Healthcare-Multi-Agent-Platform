@@ -1,0 +1,114 @@
+{
+    "tests": [
+        {
+            "name": "Complete Blood Count (CBC)",
+            "purpose": "Evaluates overall health and detects disorders like anemia, infection, and blood cancers",
+            "normal_ranges": {
+                "hemoglobin": "12-17 g/dL",
+                "WBC": "4,500-11,000 cells/mcL",
+                "platelets": "150,000-400,000 cells/mcL",
+                "RBC": "4.5-5.5 million cells/mcL"
+            },
+            "abnormal_indications": {
+                "low_hemoglobin": "Anemia, blood loss, nutritional deficiency",
+                "high_WBC": "Infection, inflammation, leukemia",
+                "low_platelets": "Bleeding disorders, bone marrow problems"
+            }
+        },
+        {
+            "name": "Fasting Blood Glucose",
+            "purpose": "Measures blood sugar levels after fasting to screen for diabetes",
+            "normal_ranges": {
+                "normal": "70-99 mg/dL",
+                "prediabetes": "100-125 mg/dL",
+                "diabetes": "126 mg/dL or higher"
+            },
+            "abnormal_indications": {
+                "high": "Diabetes, prediabetes, stress, medication effects",
+                "low": "Hypoglycemia, insulin overproduction"
+            }
+        },
+        {
+            "name": "HbA1c (Glycated Hemoglobin)",
+            "purpose": "Measures average blood sugar over 2-3 months",
+            "normal_ranges": {
+                "normal": "Below 5.7%",
+                "prediabetes": "5.7-6.4%",
+                "diabetes": "6.5% or higher"
+            },
+            "abnormal_indications": {
+                "high": "Poor blood sugar control, diabetes progression"
+            }
+        },
+        {
+            "name": "Lipid Profile",
+            "purpose": "Measures cholesterol and triglycerides for heart disease risk",
+            "normal_ranges": {
+                "total_cholesterol": "Below 200 mg/dL",
+                "LDL": "Below 100 mg/dL",
+                "HDL": "Above 40 mg/dL (men), Above 50 mg/dL (women)",
+                "triglycerides": "Below 150 mg/dL"
+            },
+            "abnormal_indications": {
+                "high_LDL": "Increased cardiovascular risk",
+                "low_HDL": "Higher heart disease risk",
+                "high_triglycerides": "Metabolic syndrome, pancreatitis risk"
+            }
+        },
+        {
+            "name": "Thyroid Panel (TSH, T3, T4)",
+            "purpose": "Evaluates thyroid function",
+            "normal_ranges": {
+                "TSH": "0.4-4.0 mIU/L",
+                "T4": "4.5-11.2 mcg/dL",
+                "T3": "80-180 ng/dL"
+            },
+            "abnormal_indications": {
+                "high_TSH_low_T4": "Hypothyroidism",
+                "low_TSH_high_T4": "Hyperthyroidism"
+            }
+        },
+        {
+            "name": "Liver Function Tests (LFT)",
+            "purpose": "Assesses liver health and function",
+            "normal_ranges": {
+                "ALT": "7-56 U/L",
+                "AST": "10-40 U/L",
+                "ALP": "44-147 U/L",
+                "bilirubin": "0.1-1.2 mg/dL"
+            },
+            "abnormal_indications": {
+                "high_ALT_AST": "Liver damage, hepatitis, fatty liver",
+                "high_bilirubin": "Jaundice, bile duct obstruction"
+            }
+        },
+        {
+            "name": "Kidney Function Tests (KFT)",
+            "purpose": "Evaluates kidney health",
+            "normal_ranges": {
+                "creatinine": "0.7-1.3 mg/dL",
+                "BUN": "7-20 mg/dL",
+                "eGFR": "Above 90 mL/min"
+            },
+            "abnormal_indications": {
+                "high_creatinine": "Kidney dysfunction, dehydration",
+                "low_eGFR": "Chronic kidney disease"
+            }
+        },
+        {
+            "name": "Urinalysis",
+            "purpose": "Analyzes urine for various conditions",
+            "normal_ranges": {
+                "pH": "4.5-8.0",
+                "protein": "Negative",
+                "glucose": "Negative",
+                "blood": "Negative"
+            },
+            "abnormal_indications": {
+                "protein_present": "Kidney disease, infection",
+                "glucose_present": "Diabetes",
+                "blood_present": "UTI, kidney stones, infection"
+            }
+        }
+    ]
+}

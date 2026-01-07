@@ -1,0 +1,84 @@
+{
+  "conditions": [
+    {
+      "name": "Common Cold",
+      "symptoms": ["runny nose", "sneezing", "sore throat", "mild fever", "cough", "congestion"],
+      "description": "A viral infection of the upper respiratory tract",
+      "recommended_specialist": "General Physician",
+      "suggested_tests": ["None usually required", "Throat swab if persistent"]
+    },
+    {
+      "name": "Influenza (Flu)",
+      "symptoms": ["high fever", "body aches", "fatigue", "headache", "chills", "dry cough"],
+      "description": "A contagious respiratory illness caused by influenza viruses",
+      "recommended_specialist": "General Physician",
+      "suggested_tests": ["Rapid influenza diagnostic test", "RT-PCR test"]
+    },
+    {
+      "name": "Migraine",
+      "symptoms": ["severe headache", "nausea", "sensitivity to light", "sensitivity to sound", "visual disturbances", "throbbing pain"],
+      "description": "A neurological condition characterized by intense, debilitating headaches",
+      "recommended_specialist": "Neurologist",
+      "suggested_tests": ["MRI scan", "CT scan if first occurrence"]
+    },
+    {
+      "name": "Gastroenteritis",
+      "symptoms": ["diarrhea", "vomiting", "stomach cramps", "nausea", "fever", "dehydration"],
+      "description": "Inflammation of the stomach and intestines, typically from infection",
+      "recommended_specialist": "Gastroenterologist",
+      "suggested_tests": ["Stool test", "Blood test for dehydration markers"]
+    },
+    {
+      "name": "Hypertension",
+      "symptoms": ["headache", "shortness of breath", "nosebleeds", "dizziness", "chest pain", "visual changes"],
+      "description": "Persistently elevated blood pressure in the arteries",
+      "recommended_specialist": "Cardiologist",
+      "suggested_tests": ["Blood pressure monitoring", "ECG", "Blood tests for kidney function"]
+    },
+    {
+      "name": "Type 2 Diabetes",
+      "symptoms": ["increased thirst", "frequent urination", "fatigue", "blurred vision", "slow healing wounds", "weight loss"],
+      "description": "A metabolic disorder characterized by high blood sugar levels",
+      "recommended_specialist": "Endocrinologist",
+      "suggested_tests": ["Fasting blood glucose", "HbA1c test", "Oral glucose tolerance test"]
+    },
+    {
+      "name": "Allergic Rhinitis",
+      "symptoms": ["sneezing", "itchy nose", "watery eyes", "nasal congestion", "postnasal drip", "itchy throat"],
+      "description": "Inflammation of the nasal passages due to allergens",
+      "recommended_specialist": "Allergist/Immunologist",
+      "suggested_tests": ["Skin prick test", "Blood test for IgE levels"]
+    },
+    {
+      "name": "Urinary Tract Infection",
+      "symptoms": ["burning urination", "frequent urination", "cloudy urine", "pelvic pain", "blood in urine", "strong urine odor"],
+      "description": "Bacterial infection affecting any part of the urinary system",
+      "recommended_specialist": "Urologist",
+      "suggested_tests": ["Urinalysis", "Urine culture"]
+    },
+    {
+      "name": "Anxiety Disorder",
+      "symptoms": ["excessive worry", "restlessness", "rapid heartbeat", "sweating", "trembling", "difficulty concentrating", "sleep problems"],
+      "description": "A mental health condition characterized by persistent feelings of anxiety",
+      "recommended_specialist": "Psychiatrist",
+      "suggested_tests": ["Psychological evaluation", "Thyroid function tests to rule out physical causes"]
+    },
+    {
+      "name": "Asthma",
+      "symptoms": ["wheezing", "shortness of breath", "chest tightness", "coughing", "difficulty breathing at night"],
+      "description": "A chronic respiratory condition affecting the airways",
+      "recommended_specialist": "Pulmonologist",
+      "suggested_tests": ["Spirometry", "Peak flow measurement", "Allergy testing"]
+    }
+  ],
+  "symptom_keywords": {
+    "fever": ["Common Cold", "Influenza", "Gastroenteritis", "Urinary Tract Infection"],
+    "headache": ["Migraine", "Hypertension", "Influenza", "Common Cold"],
+    "cough": ["Common Cold", "Influenza", "Asthma"],
+    "fatigue": ["Influenza", "Type 2 Diabetes", "Anxiety Disorder"],
+    "nausea": ["Migraine", "Gastroenteritis"],
+    "dizziness": ["Hypertension", "Anxiety Disorder"],
+    "chest pain": ["Hypertension", "Anxiety Disorder", "Asthma"],
+    "breathing difficulty": ["Asthma", "Hypertension", "Anxiety Disorder"]
+  }
+}

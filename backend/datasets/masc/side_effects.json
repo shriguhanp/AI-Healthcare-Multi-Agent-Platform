@@ -1,0 +1,76 @@
+{
+    "side_effects_guide": {
+        "categories": {
+            "common": "Expected in more than 1% of users. Usually mild and temporary.",
+            "uncommon": "Occur in 0.1-1% of users. Should be monitored.",
+            "rare": "Occur in less than 0.1% of users. May require medical attention.",
+            "severe": "Require immediate medical attention. Stop medication and seek help."
+        }
+    },
+    "general_adherence_tips": [
+        "Take medications at the same time every day",
+        "Use a pill organizer or medication box",
+        "Set phone alarms or reminders",
+        "Keep a medication diary",
+        "Store medications properly (cool, dry place unless specified)",
+        "Never share prescription medications",
+        "Do not crush or split pills unless instructed",
+        "Keep an updated list of all medications with you",
+        "Inform all healthcare providers about your medications",
+        "Refill prescriptions before running out"
+    ],
+    "missed_dose_guidance": {
+        "general": "Take as soon as you remember. If close to next dose, skip the missed dose.",
+        "antibiotics": "Take immediately when remembered. Complete the full course.",
+        "blood_pressure": "Take when remembered. Never double up doses.",
+        "diabetes": "Check blood sugar first. Follow specific medication guidelines.",
+        "blood_thinners": "Contact your doctor for guidance. Do not double dose."
+    },
+    "when_to_contact_doctor": [
+        "Severe allergic reactions (difficulty breathing, facial swelling, severe rash)",
+        "Symptoms that worsen despite medication",
+        "New or worsening side effects",
+        "Signs of overdose",
+        "Medication not working as expected",
+        "Planning surgery or dental procedures",
+        "Pregnancy or planning pregnancy",
+        "Significant changes in other medications"
+    ],
+    "drug_interaction_warnings": {
+        "alcohol": [
+            "Paracetamol",
+            "Metformin",
+            "Antihistamines",
+            "Blood thinners",
+            "Sedatives"
+        ],
+        "grapefruit": [
+            "Statins",
+            "Calcium channel blockers",
+            "Some antibiotics"
+        ],
+        "antacids": [
+            "May affect absorption of many medications - take 2 hours apart"
+        ],
+        "caffeine": [
+            "May interact with asthma medications and some antibiotics"
+        ]
+    },
+    "storage_guidelines": {
+        "room_temperature": "Most tablets and capsules (15-25°C)",
+        "refrigerate": "Some liquid antibiotics, insulin",
+        "protect_from_light": "Some vitamins, certain antibiotics",
+        "keep_dry": "All medications should be kept away from humidity"
+    },
+    "emergency_symptoms": {
+        "seek_immediate_help": [
+            "Difficulty breathing or swallowing",
+            "Severe chest pain",
+            "Severe dizziness or fainting",
+            "Uncontrollable bleeding",
+            "Severe allergic reaction (anaphylaxis)",
+            "Suicidal thoughts with psychiatric medications"
+        ],
+        "action": "Call emergency services or go to nearest hospital immediately"
+    }
+}

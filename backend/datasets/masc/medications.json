@@ -1,0 +1,237 @@
+{
+    "medications": [
+        {
+            "name": "Paracetamol (Acetaminophen)",
+            "category": "Analgesic/Antipyretic",
+            "common_uses": [
+                "Pain relief",
+                "Fever reduction"
+            ],
+            "how_to_take": "Take with or without food. Swallow whole with water.",
+            "timing": "Every 4-6 hours as needed, maximum 4 doses in 24 hours",
+            "precautions": [
+                "Avoid alcohol",
+                "Do not exceed recommended dose",
+                "Check other medications for paracetamol content"
+            ],
+            "common_side_effects": [
+                "Rare at normal doses",
+                "Nausea",
+                "Allergic reactions (rare)"
+            ],
+            "severe_side_effects": [
+                "Liver damage with overdose",
+                "Severe skin reactions"
+            ],
+            "adherence_tips": [
+                "Set a timer for doses",
+                "Keep a medication diary",
+                "Do not double dose if missed"
+            ]
+        },
+        {
+            "name": "Ibuprofen",
+            "category": "NSAID (Anti-inflammatory)",
+            "common_uses": [
+                "Pain relief",
+                "Inflammation reduction",
+                "Fever"
+            ],
+            "how_to_take": "Take with food or milk to reduce stomach upset",
+            "timing": "Every 6-8 hours as needed",
+            "precautions": [
+                "Avoid if history of stomach ulcers",
+                "Not recommended for kidney problems",
+                "Avoid during pregnancy"
+            ],
+            "common_side_effects": [
+                "Stomach upset",
+                "Nausea",
+                "Dizziness",
+                "Headache"
+            ],
+            "severe_side_effects": [
+                "GI bleeding",
+                "Kidney problems",
+                "Heart attack risk with long-term use"
+            ],
+            "adherence_tips": [
+                "Always take with food",
+                "Stay hydrated",
+                "Do not use for more than 10 days without consulting doctor"
+            ]
+        },
+        {
+            "name": "Metformin",
+            "category": "Antidiabetic",
+            "common_uses": [
+                "Type 2 Diabetes management"
+            ],
+            "how_to_take": "Take with meals to reduce stomach upset",
+            "timing": "Usually once or twice daily with meals",
+            "precautions": [
+                "Monitor kidney function",
+                "Avoid excessive alcohol",
+                "Temporary stop before surgeries"
+            ],
+            "common_side_effects": [
+                "Nausea",
+                "Diarrhea",
+                "Stomach upset",
+                "Metallic taste"
+            ],
+            "severe_side_effects": [
+                "Lactic acidosis (rare but serious)",
+                "Vitamin B12 deficiency with long-term use"
+            ],
+            "adherence_tips": [
+                "Take at same time daily",
+                "Never skip doses",
+                "Monitor blood sugar regularly"
+            ]
+        },
+        {
+            "name": "Amlodipine",
+            "category": "Calcium Channel Blocker",
+            "common_uses": [
+                "High blood pressure",
+                "Chest pain (angina)"
+            ],
+            "how_to_take": "Take at the same time each day, with or without food",
+            "timing": "Once daily",
+            "precautions": [
+                "Avoid grapefruit",
+                "Rise slowly from sitting to prevent dizziness"
+            ],
+            "common_side_effects": [
+                "Swelling in ankles",
+                "Dizziness",
+                "Flushing",
+                "Headache"
+            ],
+            "severe_side_effects": [
+                "Severe hypotension",
+                "Irregular heartbeat"
+            ],
+            "adherence_tips": [
+                "Use a pill organizer",
+                "Monitor blood pressure",
+                "Do not stop suddenly"
+            ]
+        },
+        {
+            "name": "Omeprazole",
+            "category": "Proton Pump Inhibitor",
+            "common_uses": [
+                "Acid reflux",
+                "Stomach ulcers",
+                "GERD"
+            ],
+            "how_to_take": "Take 30-60 minutes before meals, preferably in the morning",
+            "timing": "Once or twice daily before meals",
+            "precautions": [
+                "Long-term use may affect bone health",
+                "May reduce vitamin B12 absorption"
+            ],
+            "common_side_effects": [
+                "Headache",
+                "Nausea",
+                "Diarrhea",
+                "Stomach pain"
+            ],
+            "severe_side_effects": [
+                "Clostridium difficile infection",
+                "Kidney problems with long-term use"
+            ],
+            "adherence_tips": [
+                "Take before breakfast",
+                "Complete the full course",
+                "Avoid trigger foods"
+            ]
+        },
+        {
+            "name": "Amoxicillin",
+            "category": "Antibiotic",
+            "common_uses": [
+                "Bacterial infections"
+            ],
+            "how_to_take": "Take with or without food. Complete the full course.",
+            "timing": "Every 8 hours or as prescribed",
+            "precautions": [
+                "Inform if allergic to penicillin",
+                "Take probiotics to prevent diarrhea"
+            ],
+            "common_side_effects": [
+                "Diarrhea",
+                "Nausea",
+                "Skin rash"
+            ],
+            "severe_side_effects": [
+                "Severe allergic reaction",
+                "Antibiotic-associated colitis"
+            ],
+            "adherence_tips": [
+                "Complete entire course even if feeling better",
+                "Space doses evenly",
+                "Use reminders"
+            ]
+        },
+        {
+            "name": "Atorvastatin",
+            "category": "Statin (Cholesterol-lowering)",
+            "common_uses": [
+                "High cholesterol",
+                "Cardiovascular disease prevention"
+            ],
+            "how_to_take": "Take at the same time daily, usually in the evening",
+            "timing": "Once daily, preferably at night",
+            "precautions": [
+                "Avoid grapefruit",
+                "Report muscle pain immediately",
+                "Regular liver function tests"
+            ],
+            "common_side_effects": [
+                "Muscle pain",
+                "Headache",
+                "Digestive issues"
+            ],
+            "severe_side_effects": [
+                "Rhabdomyolysis (severe muscle breakdown)",
+                "Liver damage"
+            ],
+            "adherence_tips": [
+                "Take before bed",
+                "Monitor cholesterol levels",
+                "Maintain healthy diet"
+            ]
+        },
+        {
+            "name": "Cetirizine",
+            "category": "Antihistamine",
+            "common_uses": [
+                "Allergies",
+                "Hay fever",
+                "Itching"
+            ],
+            "how_to_take": "Take with or without food",
+            "timing": "Once daily, preferably in the evening",
+            "precautions": [
+                "May cause drowsiness",
+                "Avoid alcohol",
+                "Use caution when driving"
+            ],
+            "common_side_effects": [
+                "Drowsiness",
+                "Dry mouth",
+                "Fatigue"
+            ],
+            "severe_side_effects": [
+                "Severe allergic reactions (rare)"
+            ],
+            "adherence_tips": [
+                "Take at same time daily",
+                "Keep by bedside if taking at night"
+            ]
+        }
+    ]
+}
