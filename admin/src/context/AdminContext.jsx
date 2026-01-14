@@ -13,6 +13,7 @@ const AdminContextProvider = (props) => {
 
     const [appointments, setAppointments] = useState([])
     const [doctors, setDoctors] = useState([])
+    const [hospitals, setHospitals] = useState([])
     const [dashData, setDashData] = useState(false)
 
     // Getting all Doctors data from Database using API
@@ -33,6 +34,35 @@ const AdminContextProvider = (props) => {
 
     }
 
+    // Getting all Hospitals data from Database using API
+    const getAllHospitals = async () => {
+        try {
+            const { data } = await axios.get(backendUrl + '/api/admin/all-hospitals', { headers: { aToken } })
+            if (data.success) {
+                setHospitals(data.hospitals)
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    // Function to delete hospital using API
+    const deleteHospital = async (id) => {
+        try {
+            const { data } = await axios.post(backendUrl + '/api/admin/delete-hospital', { id }, { headers: { aToken } })
+            if (data.success) {
+                toast.success(data.message)
+                getAllHospitals()
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
     // Function to change doctor availablity using API
     const changeAvailability = async (docId) => {
         try {
@@ -48,6 +78,43 @@ const AdminContextProvider = (props) => {
         } catch (error) {
             console.log(error)
             toast.error(error.message)
+        }
+    }
+
+    // Function to delete doctor using API
+    const deleteDoctor = async (docId) => {
+        try {
+
+            const { data } = await axios.post(backendUrl + '/api/admin/delete-doctor', { docId }, { headers: { aToken } })
+            if (data.success) {
+                toast.success(data.message)
+                getAllDoctors()
+            } else {
+                toast.error(data.message)
+            }
+
+        } catch (error) {
+            console.log(error)
+            toast.error(error.message)
+        }
+    }
+
+    // Function to update doctor info using API
+    const updateDoctor = async (formData) => {
+        try {
+            const { data } = await axios.post(backendUrl + '/api/admin/update-doctor', formData, { headers: { aToken } })
+            if (data.success) {
+                toast.success(data.message)
+                getAllDoctors()
+                return true
+            } else {
+                toast.error(data.message)
+                return false
+            }
+        } catch (error) {
+            console.log(error)
+            toast.error(error.message)
+            return false
         }
     }
 
@@ -120,7 +187,12 @@ const AdminContextProvider = (props) => {
         getAllAppointments,
         getDashData,
         cancelAppointment,
-        dashData
+        dashData,
+        deleteDoctor,
+        updateDoctor,
+        hospitals,
+        getAllHospitals,
+        deleteHospital
     }
 
     return (

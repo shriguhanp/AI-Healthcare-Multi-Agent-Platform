@@ -1,32 +1,84 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../context/AppContext'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import LocationSelector from '../components/LocationSelector'
 
 const Doctors = () => {
 
   const { speciality } = useParams()
+  const [searchParams] = useSearchParams()
+  const cityParam = searchParams.get('city')
 
   const [filterDoc, setFilterDoc] = useState([])
   const [showFilter, setShowFilter] = useState(false)
   const navigate = useNavigate();
 
-  const { doctors } = useContext(AppContext)
+  const { doctors, selectedCity, updateSelectedCity, selectedCountry, updateSelectedCountry, searchDoctorsByLocation } = useContext(AppContext)
 
-  const applyFilter = () => {
-    if (speciality) {
-      setFilterDoc(doctors.filter(doc => doc.speciality === speciality))
-    } else {
-      setFilterDoc(doctors)
+  const applyFilter = async () => {
+    let filtered = [...doctors];
+
+    // Filter by Country (MANDATORY per user request)
+    if (selectedCountry) {
+      filtered = filtered.filter(doc => doc.location?.country === selectedCountry);
     }
+
+    // Filter by Speciality
+    if (speciality) {
+      filtered = filtered.filter(doc => doc.speciality === speciality);
+    }
+
+    // Filter by City/Region
+    if (selectedCity) {
+      filtered = filtered.filter(doc => doc.location?.city === selectedCity);
+    }
+
+    setFilterDoc(filtered);
+  }
+
+  const handleChangeLocation = () => {
+    updateSelectedCity('')
+    updateSelectedCountry('India')
+    navigate('/doctors')
   }
 
   useEffect(() => {
+    if (cityParam && cityParam !== selectedCity) {
+      updateSelectedCity(cityParam)
+    }
+  }, [cityParam])
+
+  useEffect(() => {
     applyFilter()
-  }, [doctors, speciality])
+  }, [doctors, speciality, selectedCity, selectedCountry])
 
   return (
     <div>
-      <p className='text-gray-600'>Browse through the doctors specialist.</p>
+      <div className='flex flex-col sm:flex-row items-center justify-between gap-4 mb-6'>
+        <div className='flex flex-col'>
+          <p className='text-gray-600 font-medium'>
+            {selectedCity ? (
+              <>Doctors in <span className='text-primary'>{selectedCity}</span>, {selectedCountry}</>
+            ) : (
+              <>Doctors in <span className='text-primary'>{selectedCountry}</span></>
+            )}
+          </p>
+          <p className='text-gray-400 text-xs mt-1'>Showing results according to your selection</p>
+        </div>
+
+        <div className='flex items-center gap-4'>
+          <LocationSelector />
+          {(selectedCity || selectedCountry !== 'India') && (
+            <button
+              onClick={handleChangeLocation}
+              className='text-gray-500 text-xs underline hover:text-primary transition-colors'
+            >
+              Reset
+            </button>
+          )}
+        </div>
+      </div>
+
       <div className='flex flex-col sm:flex-row items-start gap-5 mt-5'>
         <button onClick={() => setShowFilter(!showFilter)} className={`py-1 px-3 border rounded text-sm  transition-all sm:hidden ${showFilter ? 'bg-primary text-white' : ''}`}>Filters</button>
         <div className={`flex-col gap-4 text-sm text-gray-600 ${showFilter ? 'flex' : 'hidden sm:flex'}`}>
@@ -47,6 +99,9 @@ const Doctors = () => {
                 </div>
                 <p className='text-[#262626] text-lg font-medium'>{item.name}</p>
                 <p className='text-[#5C5C5C] text-sm'>{item.speciality}</p>
+                {item.location?.city && (
+                  <p className='text-[#888] text-xs mt-1'>📍 {item.location.city}</p>
+                )}
               </div>
             </div>
           ))}

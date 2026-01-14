@@ -1,5 +1,22 @@
 import express from 'express';
-import { loginUser, registerUser, getProfile, updateProfile, bookAppointment, listAppointment, cancelAppointment, paymentRazorpay, verifyRazorpay, paymentStripe, verifyStripe, updateMedicationIntake, editMedicine } from '../controllers/userController.js';
+import {
+    loginUser,
+    registerUser,
+    getProfile,
+    updateProfile,
+    bookAppointment,
+    listAppointment,
+    cancelAppointment,
+    paymentRazorpay,
+    verifyRazorpay,
+    paymentStripe,
+    verifyStripe,
+    updateMedicationIntake,
+    editMedicine,
+    getNearbyDoctors,
+    rateAppointment,
+    getAllHospitals
+} from '../controllers/userController.js';
 import upload from '../middleware/multer.js';
 import authUser from '../middleware/authUser.js';
 const userRouter = express.Router();
@@ -20,5 +37,10 @@ userRouter.post("/verifyStripe", authUser, verifyStripe)
 // Medication actions: mark intake/missed and edit medicine
 userRouter.post('/medication/intake', authUser, updateMedicationIntake)
 userRouter.post('/medication/edit', authUser, editMedicine)
+
+// New advanced routes
+userRouter.post('/search-doctors', getNearbyDoctors)
+userRouter.post('/rate-appointment', authUser, rateAppointment)
+userRouter.get('/hospitals', getAllHospitals)
 
 export default userRouter;

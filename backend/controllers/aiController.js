@@ -216,7 +216,7 @@ const callGroqChat = async (systemPrompt, userMessage, agent) => {
       ],
       model: model,
       temperature: temperature,
-      max_tokens: 300,
+      max_tokens: 200,
     });
 
     return completion.choices[0]?.message?.content || null;

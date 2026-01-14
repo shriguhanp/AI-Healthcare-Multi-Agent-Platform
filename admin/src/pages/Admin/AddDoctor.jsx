@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { assets } from '../../assets/assets'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import { AdminContext } from '../../context/AdminContext'
 import { AppContext } from '../../context/AppContext'
+import { INDIAN_STATES, COUNTRIES } from '../../utils/constants'
 
 const AddDoctor = () => {
 
@@ -18,9 +19,20 @@ const AddDoctor = () => {
     const [degree, setDegree] = useState('')
     const [address1, setAddress1] = useState('')
     const [address2, setAddress2] = useState('')
+    const [city, setCity] = useState('')
+    const [country, setCountry] = useState('India')
+    const [area, setArea] = useState('')
+    const [pincode, setPincode] = useState('')
+    const [hospitalId, setHospitalId] = useState('')
 
     const { backendUrl } = useContext(AppContext)
-    const { aToken, getAllDoctors } = useContext(AdminContext)
+    const { aToken, getAllDoctors, hospitals, getAllHospitals } = useContext(AdminContext)
+
+    useEffect(() => {
+        if (aToken) {
+            getAllHospitals()
+        }
+    }, [aToken])
 
     const onSubmitHandler = async (event) => {
         event.preventDefault()
@@ -43,6 +55,10 @@ const AddDoctor = () => {
             formData.append('speciality', speciality)
             formData.append('degree', degree)
             formData.append('address', JSON.stringify({ line1: address1, line2: address2 }))
+            formData.append('location', JSON.stringify({ city, country, area, pincode }))
+            if (hospitalId) {
+                formData.append('hospitalId', hospitalId)
+            }
 
             // console log formdata            
             formData.forEach((value, key) => {
@@ -63,6 +79,11 @@ const AddDoctor = () => {
                 setDegree('')
                 setAbout('')
                 setFees('')
+                setCity('')
+                setCountry('India')
+                setArea('')
+                setPincode('')
+                setHospitalId('')
             } else {
                 toast.error(data.message)
             }
@@ -124,6 +145,16 @@ const AddDoctor = () => {
                         </div>
 
                         <div className='flex-1 flex flex-col gap-1'>
+                            <p>Hospital (Optional)</p>
+                            <select onChange={e => setHospitalId(e.target.value)} value={hospitalId} className='border rounded px-2 py-2'>
+                                <option value="">None (Independent)</option>
+                                {hospitals.map((item, index) => (
+                                    <option key={index} value={item._id}>{item.name}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className='flex-1 flex flex-col gap-1'>
                             <p>Fees</p>
                             <input onChange={e => setFees(e.target.value)} value={fees} className='border rounded px-3 py-2' type="number" placeholder='Doctor fees' required />
                         </div>
@@ -154,6 +185,27 @@ const AddDoctor = () => {
                             <p>Address</p>
                             <input onChange={e => setAddress1(e.target.value)} value={address1} className='border rounded px-3 py-2' type="text" placeholder='Address 1' required />
                             <input onChange={e => setAddress2(e.target.value)} value={address2} className='border rounded px-3 py-2' type="text" placeholder='Address 2' required />
+                        </div>
+
+                        <div className='flex-1 flex flex-col gap-1'>
+                            <p>Location Details</p>
+                            <select onChange={e => setCountry(e.target.value)} value={country} className='border rounded px-3 py-2' required>
+                                {COUNTRIES.map((item, index) => (
+                                    <option key={index} value={item}>{item}</option>
+                                ))}
+                            </select>
+                            {country === 'India' ? (
+                                <select onChange={e => setCity(e.target.value)} value={city} className='border rounded px-3 py-2' required>
+                                    <option value="">Select State/UT</option>
+                                    {INDIAN_STATES.map((state, index) => (
+                                        <option key={index} value={state}>{state}</option>
+                                    ))}
+                                </select>
+                            ) : (
+                                <input onChange={e => setCity(e.target.value)} value={city} className='border rounded px-3 py-2' type="text" placeholder='City' required />
+                            )}
+                            <input onChange={e => setArea(e.target.value)} value={area} className='border rounded px-3 py-2' type="text" placeholder='Area' />
+                            <input onChange={e => setPincode(e.target.value)} value={pincode} className='border rounded px-3 py-2' type="text" placeholder='Pincode' />
                         </div>
 
                     </div>

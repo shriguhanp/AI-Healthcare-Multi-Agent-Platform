@@ -105,7 +105,7 @@ export function validateAgentScope(message, agentType) {
         return { appropriate: true };
     }
     else if (agentType === "masc") {
-        // MASC agent keywords - medications, drugs, side effects, adherence
+        // MASC agent keywords - medications, drugs, side effects, adherence, safety, lifestyle
         const mascKeywords = [
             "medication", "medicine", "drug", "pill", "tablet", "capsule",
             "prescription", "dose", "dosage", "take", "taking",
@@ -115,7 +115,13 @@ export function validateAgentScope(message, agentType) {
             "adherence", "compliance", "schedule", "timing",
             "antibiotic", "painkiller", "insulin", "statin", "aspirin",
             "supplement", "vitamin", "over the counter", "otc",
-            "how to take", "when to take", "with food", "before meal"
+            "how to take", "when to take", "with food", "before meal",
+            // Safety & Precautions
+            "alcohol", "storage", "store", "interaction", "warning",
+            // Lifestyle & Support
+            "diet", "food", "nutrition", "eat", "hydration", "water", "fluid",
+            "sleep", "exercise", "activity", "wellness", "mental", "stress",
+            "fatigue", "tired", "energy"
         ];
 
         // Check if query contains medication keywords

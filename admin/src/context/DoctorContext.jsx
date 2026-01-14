@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
@@ -40,12 +40,24 @@ const DoctorContextProvider = (props) => {
             const { data } = await axios.get(backendUrl + '/api/doctor/profile', { headers: { dToken } })
             console.log(data.profileData)
             setProfileData(data.profileData)
+            setDoctorId(data.profileData._id) // Set doctorId here
+            localStorage.setItem('doctorId', data.profileData._id) // Persist it
 
         } catch (error) {
             console.log(error)
             toast.error(error.message)
         }
     }
+
+    useEffect(() => {
+        if (dToken) {
+            getProfileData() // Fetch profile (and thus ID) whenever we have a token
+        } else {
+            setProfileData(false)
+            setDoctorId('')
+            localStorage.removeItem('doctorId')
+        }
+    }, [dToken])
 
     // Function to cancel doctor appointment using API
     const cancelAppointment = async (appointmentId) => {

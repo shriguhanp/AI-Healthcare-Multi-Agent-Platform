@@ -3,6 +3,7 @@ import { DoctorContext } from '../../context/DoctorContext'
 import { AppContext } from '../../context/AppContext'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { COUNTRIES, INDIAN_STATES } from '../../utils/constants'
 
 const DoctorProfile = () => {
 
@@ -18,7 +19,8 @@ const DoctorProfile = () => {
                 address: profileData.address,
                 fees: profileData.fees,
                 about: profileData.about,
-                available: profileData.available
+                available: profileData.available,
+                location: profileData.location || {}
             }
 
             const { data } = await axios.post(backendUrl + '/api/doctor/update-profile', updateData, { headers: { dToken } })
@@ -86,6 +88,71 @@ const DoctorProfile = () => {
                             <br />
                             {isEdit ? <input type='text' onChange={(e) => setProfileData(prev => ({ ...prev, address: { ...prev.address, line2: e.target.value } }))} value={profileData.address.line2} /> : profileData.address.line2}
                         </p>
+                    </div>
+
+                    {/* ----- Location Details ----- */}
+                    <div className='flex flex-col gap-3 py-2 border-t mt-4 pt-4'>
+                        <p className='font-medium text-gray-700'>Location Details:</p>
+
+                        <div className='flex flex-col gap-1'>
+                            <label className='text-sm text-gray-600'>Country</label>
+                            {isEdit ? (
+                                <select
+                                    onChange={(e) => setProfileData(prev => ({
+                                        ...prev,
+                                        location: { ...prev.location, country: e.target.value }
+                                    }))}
+                                    value={profileData.location?.country || 'India'}
+                                    className='border border-gray-300 rounded p-2 text-sm'
+                                >
+                                    {COUNTRIES.map((country, index) => (
+                                        <option key={index} value={country}>{country}</option>
+                                    ))}
+                                </select>
+                            ) : (
+                                <p className='text-sm text-gray-800'>{profileData.location?.country || 'Not specified'}</p>
+                            )}
+                        </div>
+
+                        <div className='flex-col flex gap-1'>
+                            <label className='text-sm text-gray-600'>Region/State</label>
+                            {isEdit ? (
+                                <select
+                                    onChange={(e) => setProfileData(prev => ({
+                                        ...prev,
+                                        location: { ...prev.location, city: e.target.value }
+                                    }))}
+                                    value={profileData.location?.city || ''}
+                                    className='border border-gray-300 rounded p-2 text-sm'
+                                    required
+                                >
+                                    <option value="">Select State/UT</option>
+                                    {INDIAN_STATES.map((state, index) => (
+                                        <option key={index} value={state}>{state}</option>
+                                    ))}
+                                </select>
+                            ) : (
+                                <p className='text-sm text-gray-800'>{profileData.location?.city || 'Not specified'}</p>
+                            )}
+                        </div>
+
+                        <div className='flex flex-col gap-1'>
+                            <label className='text-sm text-gray-600'>Pincode</label>
+                            {isEdit ? (
+                                <input
+                                    type="text"
+                                    onChange={(e) => setProfileData(prev => ({
+                                        ...prev,
+                                        location: { ...prev.location, pincode: e.target.value }
+                                    }))}
+                                    value={profileData.location?.pincode || ''}
+                                    className='border border-gray-300 rounded p-2 text-sm'
+                                    placeholder="Enter pincode"
+                                />
+                            ) : (
+                                <p className='text-sm text-gray-800'>{profileData.location?.pincode || 'Not specified'}</p>
+                            )}
+                        </div>
                     </div>
 
                     <div className='flex gap-1 pt-2'>

@@ -182,9 +182,17 @@ const doctorProfile = async (req, res) => {
 const updateDoctorProfile = async (req, res) => {
     try {
 
-        const { docId, fees, address, available } = req.body
+        const { docId, fees, address, available, about, location } = req.body
 
-        await doctorModel.findByIdAndUpdate(docId, { fees, address, available })
+        const updateData = {
+            fees,
+            address,
+            available,
+            ...(about && { about }),
+            ...(location && { location })
+        }
+
+        await doctorModel.findByIdAndUpdate(docId, updateData)
 
         res.json({ success: true, message: 'Profile Updated' })
 
@@ -235,6 +243,52 @@ const doctorDashboard = async (req, res) => {
     }
 }
 
+// API to update doctor availability status (Available/Unavailable/Busy)
+const updateAvailabilityStatus = async (req, res) => {
+    try {
+        const { docId, status } = req.body;
+
+        if (!['Available', 'Unavailable', 'Busy'].includes(status)) {
+            return res.json({ success: false, message: 'Invalid status' });
+        }
+
+        await doctorModel.findByIdAndUpdate(docId, { availabilityStatus: status });
+        res.json({ success: true, message: 'Status updated' });
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
+// API to get doctor token information
+const getTokenInfo = async (req, res) => {
+    try {
+        const { docId } = req.body;
+        const doctor = await doctorModel.findById(docId).select('tokenLimit currentTokenCount lastTokenReset');
+
+        res.json({ success: true, tokenInfo: doctor });
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
+// API to update doctor location
+const updateLocation = async (req, res) => {
+    try {
+        const { docId, location } = req.body;
+
+        await doctorModel.findByIdAndUpdate(docId, { location });
+        res.json({ success: true, message: 'Location updated' });
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
 export {
     loginDoctor,
     appointmentsDoctor,
@@ -247,5 +301,9 @@ export {
     appointmentComplete,
     doctorDashboard,
     doctorProfile,
-    updateDoctorProfile
+    updateDoctorProfile,
+    // Advanced features
+    updateAvailabilityStatus,
+    getTokenInfo,
+    updateLocation
 }

@@ -4,6 +4,7 @@ import validator from "validator";
 import userModel from "../models/userModel.js";
 import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
+import hospitalModel from "../models/hospitalModel.js";
 import { v2 as cloudinary } from 'cloudinary'
 import stripe from "stripe";
 import razorpay from 'razorpay';
@@ -157,6 +158,16 @@ const bookAppointment = async (req, res) => {
             return res.json({ success: false, message: 'Doctor Not Available' })
         }
 
+        // Check availability status
+        if (docData.availabilityStatus === 'Unavailable') {
+            return res.json({ success: false, message: 'Doctor is currently unavailable' })
+        }
+
+        // Check token availability
+        if (docData.currentTokenCount >= docData.tokenLimit) {
+            return res.json({ success: false, message: 'Token Full - No more appointments available today' })
+        }
+
         let slots_booked = docData.slots_booked
 
         // checking for slot availablity 
@@ -176,6 +187,9 @@ const bookAppointment = async (req, res) => {
 
         delete docData.slots_booked
 
+        // Assign token number
+        const tokenNumber = docData.currentTokenCount + 1;
+
         const appointmentData = {
             userId,
             docId,
@@ -184,16 +198,20 @@ const bookAppointment = async (req, res) => {
             amount: docData.fees,
             slotTime,
             slotDate,
-            date: Date.now()
+            date: Date.now(),
+            tokenNumber
         }
 
         const newAppointment = new appointmentModel(appointmentData)
         await newAppointment.save()
 
-        // save new slots data in docData
-        await doctorModel.findByIdAndUpdate(docId, { slots_booked })
+        // save new slots data and increment token count in docData
+        await doctorModel.findByIdAndUpdate(docId, {
+            slots_booked,
+            currentTokenCount: tokenNumber
+        })
 
-        res.json({ success: true, message: 'Appointment Booked' })
+        res.json({ success: true, message: 'Appointment Booked', tokenNumber })
 
     } catch (error) {
         console.log(error)
@@ -443,6 +461,111 @@ const editMedicine = async (req, res) => {
     }
 }
 
+// API to search nearby doctors based on location
+const getNearbyDoctors = async (req, res) => {
+    try {
+        const { city, area, pincode, country, specialty, availability, maxDistance, sortBy } = req.body;
+
+        let query = {};
+
+        // Location filtering
+        if (pincode) {
+            query['location.pincode'] = pincode;
+        }
+
+        if (country) {
+            query['location.country'] = country;
+        }
+
+        if (city || area) {
+            const locationOr = [];
+            if (city) locationOr.push({ 'location.city': { $regex: city, $options: 'i' } });
+            if (area) locationOr.push({ 'location.area': { $regex: area, $options: 'i' } });
+            if (locationOr.length) query.$or = locationOr;
+        }
+
+        // Specialty filter
+        if (specialty) {
+            query.speciality = { $regex: specialty, $options: 'i' };
+        }
+
+        // Availability filter
+        if (availability) {
+            query.availabilityStatus = availability;
+        }
+
+        // Get doctors
+        let doctors = await doctorModel.find(query).select('-password');
+
+        // Add token availability status and distance
+        doctors = doctors.map(doc => {
+            const docObj = doc.toObject();
+            docObj.tokenAvailable = docObj.currentTokenCount < docObj.tokenLimit;
+            docObj.tokensRemaining = docObj.tokenLimit - docObj.currentTokenCount;
+            return docObj;
+        });
+
+        // Sort by rating, distance, or availability
+        if (sortBy === 'rating') {
+            doctors.sort((a, b) => b.rating - a.rating);
+        } else if (sortBy === 'tokenAvailable') {
+            doctors.sort((a, b) => b.tokensRemaining - a.tokensRemaining);
+        }
+
+        res.json({ success: true, doctors });
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
+// API to get all hospitals for frontend
+const getAllHospitals = async (req, res) => {
+    try {
+        const hospitals = await hospitalModel.find({}).select('-password -email -phone')
+        res.json({ success: true, hospitals })
+    } catch (error) {
+        console.log(error)
+        res.json({ success: false, message: error.message })
+    }
+}
+
+// API to rate an appointment
+const rateAppointment = async (req, res) => {
+    try {
+        const { appointmentId, rating, review } = req.body;
+
+        if (!rating || rating < 1 || rating > 5) {
+            return res.json({ success: false, message: 'Rating must be between 1 and 5' });
+        }
+
+        const appointment = await appointmentModel.findById(appointmentId);
+        if (!appointment || !appointment.isCompleted) {
+            return res.json({ success: false, message: 'Can only rate completed appointments' });
+        }
+
+        // Update appointment
+        await appointmentModel.findByIdAndUpdate(appointmentId, { rating, review });
+
+        // Update doctor's average rating
+        const doctor = await doctorModel.findById(appointment.docId);
+        const newTotalRatings = doctor.totalRatings + 1;
+        const newRating = ((doctor.rating * doctor.totalRatings) + rating) / newTotalRatings;
+
+        await doctorModel.findByIdAndUpdate(appointment.docId, {
+            rating: newRating.toFixed(2),
+            totalRatings: newTotalRatings
+        });
+
+        res.json({ success: true, message: 'Rating submitted successfully' });
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
 export {
     loginUser,
     registerUser,
@@ -456,5 +579,9 @@ export {
     paymentStripe,
     verifyStripe,
     updateMedicationIntake,
-    editMedicine
+    editMedicine,
+    // Advanced features
+    getNearbyDoctors,
+    rateAppointment,
+    getAllHospitals
 }
