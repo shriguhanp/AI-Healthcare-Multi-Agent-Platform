@@ -1,6 +1,13 @@
 # AI Healthcare Multi-Agent Platform
 
 A full-stack MERN (MongoDB, Express, React, Node.js) healthcare application featuring advanced AI agents for diagnostics and medication adherence coaching.
+<img width="1534" height="684" alt="image" src="https://github.com/user-attachments/assets/e8f1c099-2681-4b00-9cae-b8e04012ac5a" />
+<img width="1534" height="854" alt="image" src="https://github.com/user-attachments/assets/1fe114c3-4825-489e-b3df-e64a76bcd67b" />
+<img width="1682" height="808" alt="image" src="https://github.com/user-attachments/assets/dbcffba2-a158-411c-95cf-9547442d3f9b" />
+<img width="1544" height="731" alt="image" src="https://github.com/user-attachments/assets/57f5c447-4ba9-4c99-9bb9-ae9172ae0a58" />
+
+
+
 
 ## 🚀 Features
 - **User/Doctor/Admin Roles**: Comprehensive dashboard for all stakeholders.
