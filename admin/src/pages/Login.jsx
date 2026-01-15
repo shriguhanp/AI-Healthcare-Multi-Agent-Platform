@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { DoctorContext } from '../context/DoctorContext'
 import { AdminContext } from '../context/AdminContext'
@@ -24,7 +24,7 @@ const Login = () => {
     if (state === 'Admin') {
 
       try {
-        const { data } = await axios.post(backendUrl + '/api/admin/login', { email, password })
+        const { data } = await axios.post(backendUrl + '/api/admin/login', { email: email.trim(), password: password.trim() })
         console.log('admin login response', data)
         if (data.success) {
           setAToken(data.token)
@@ -42,7 +42,7 @@ const Login = () => {
     } else {
 
       try {
-        const { data } = await axios.post(backendUrl + '/api/doctor/login', { email, password })
+        const { data } = await axios.post(backendUrl + '/api/doctor/login', { email: email.trim(), password: password.trim() })
         console.log('doctor login response', data)
         if (data.success) {
           setDToken(data.token)

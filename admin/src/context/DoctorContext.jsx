@@ -1,11 +1,11 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useEffect } from "react";
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
 
 export const DoctorContext = createContext()
 
-const DoctorContextProvider = (props) => {
+const DoctorContextProvider = ({ children }) => {
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
 
@@ -140,7 +140,7 @@ const DoctorContextProvider = (props) => {
 
     return (
         <DoctorContext.Provider value={value}>
-            {props.children}
+            {children}
         </DoctorContext.Provider>
     )
 

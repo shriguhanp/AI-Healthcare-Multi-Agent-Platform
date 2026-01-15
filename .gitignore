@@ -6,3 +6,5 @@ backend/venv/
 __pycache__/
 .env
 backend/.env
+backend/temp_env.txt
+backend/server_boot.log

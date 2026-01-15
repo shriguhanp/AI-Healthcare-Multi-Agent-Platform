@@ -1,11 +1,11 @@
-import axios from "axios";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 
+import axios from "axios";
 export const AdminContext = createContext()
 
-const AdminContextProvider = (props) => {
+const AdminContextProvider = ({ children }) => {
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
 
@@ -24,12 +24,15 @@ const AdminContextProvider = (props) => {
             const { data } = await axios.get(backendUrl + '/api/admin/all-doctors', { headers: { aToken } })
             if (data.success) {
                 setDoctors(data.doctors)
+                console.log("Doctors fetched:", data.doctors)
             } else {
                 toast.error(data.message)
+                console.error("Doctors fetch failed:", data.message)
             }
 
         } catch (error) {
             toast.error(error.message)
+            console.error("Doctors fetch error:", error)
         }
 
     }
@@ -40,11 +43,14 @@ const AdminContextProvider = (props) => {
             const { data } = await axios.get(backendUrl + '/api/admin/all-hospitals', { headers: { aToken } })
             if (data.success) {
                 setHospitals(data.hospitals)
+                console.log("Hospitals fetched:", data.hospitals)
             } else {
                 toast.error(data.message)
+                console.error("Hospitals fetch failed:", data.message)
             }
         } catch (error) {
             toast.error(error.message)
+            console.error("Hospitals fetch error:", error)
         }
     }
 
@@ -197,7 +203,7 @@ const AdminContextProvider = (props) => {
 
     return (
         <AdminContext.Provider value={value}>
-            {props.children}
+            {children}
         </AdminContext.Provider>
     )
 

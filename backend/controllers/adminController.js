@@ -11,10 +11,15 @@ import userModel from "../models/userModel.js";
 const loginAdmin = async (req, res) => {
     try {
 
-        const { email, password } = req.body
+        const email = req.body.email?.trim();
+        const password = req.body.password?.trim();
+        
+        // Use environment variables or hardcoded fallback for requested credentials
+        const expectedEmail = process.env.ADMIN_EMAIL || "shriguhan7@gmail.com";
+        const expectedPassword = process.env.ADMIN_PASSWORD || "12345";
 
-        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
-            const token = jwt.sign(email + password, process.env.JWT_SECRET)
+        if (email === expectedEmail && password === expectedPassword) {
+            const token = jwt.sign(email + password, process.env.JWT_SECRET || "greatstack")
             res.json({ success: true, token })
         } else {
             res.json({ success: false, message: "Invalid credentials" })

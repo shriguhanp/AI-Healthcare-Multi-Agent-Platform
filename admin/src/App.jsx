@@ -26,41 +26,42 @@ const App = () => {
   const { dToken } = useContext(DoctorContext)
   const { aToken } = useContext(AdminContext)
 
-  return dToken || aToken ? (
-    <div className='bg-[#F8F9FD]'>
+  return (
+    <div className='bg-[#F8F9FD] min-h-screen'>
       <ToastContainer />
-      <Navbar />
-      <div className='flex items-start'>
-        <Sidebar />
-        <Routes>
-          <Route path='/' element={<></>} />
-          <Route path='/admin-dashboard' element={<Dashboard />} />
-          <Route path='/all-appointments' element={<AllAppointments />} />
-          <Route path='/add-doctor' element={<AddDoctor />} />
-          <Route path='/doctor-list' element={<DoctorsList />} />
-          <Route path='/edit-doctor/:docId' element={<EditDoctor />} />
-          <Route path='/add-hospital' element={<AddHospital />} />
-          <Route path='/hospital-list' element={<HospitalList />} />
-          <Route path='/doctor-dashboard' element={<DoctorDashboard />} />
-          <Route path='/doctor-appointments' element={<DoctorAppointments />} />
-          <Route path='/doctor-patients' element={<Patients />} />
-          <Route path='/doctor-profile' element={<DoctorProfile />} />
-          <Route
-            path='/doctor-chat'
-            element={dToken ? <DoctorChatContextProvider><DoctorChat /></DoctorChatContextProvider> : <DoctorChat />}
-          />
-          <Route
-            path='/doctor-chat/:partnerId'
-            element={dToken ? <DoctorChatContextProvider><DoctorChat /></DoctorChatContextProvider> : <DoctorChat />}
-          />
-        </Routes>
-      </div>
+      {(dToken || aToken) ? (
+        <>
+          <Navbar />
+          <div className='flex items-start'>
+            <Sidebar />
+            <Routes>
+              <Route path='/' element={<></>} />
+              <Route path='/admin-dashboard' element={<Dashboard />} />
+              <Route path='/all-appointments' element={<AllAppointments />} />
+              <Route path='/add-doctor' element={<AddDoctor />} />
+              <Route path='/doctor-list' element={<DoctorsList />} />
+              <Route path='/edit-doctor/:docId' element={<EditDoctor />} />
+              <Route path='/add-hospital' element={<AddHospital />} />
+              <Route path='/hospital-list' element={<HospitalList />} />
+              <Route path='/doctor-dashboard' element={<DoctorDashboard />} />
+              <Route path='/doctor-appointments' element={<DoctorAppointments />} />
+              <Route path='/doctor-patients' element={<Patients />} />
+              <Route path='/doctor-profile' element={<DoctorProfile />} />
+              <Route
+                path='/doctor-chat'
+                element={dToken ? <DoctorChatContextProvider><DoctorChat /></DoctorChatContextProvider> : <div className='p-5'>Access Denied</div>}
+              />
+              <Route
+                path='/doctor-chat/:partnerId'
+                element={dToken ? <DoctorChatContextProvider><DoctorChat /></DoctorChatContextProvider> : <div className='p-5'>Access Denied</div>}
+              />
+            </Routes>
+          </div>
+        </>
+      ) : (
+        <Login />
+      )}
     </div>
-  ) : (
-    <>
-      <ToastContainer />
-      <Login />
-    </>
   )
 }
 
