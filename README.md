@@ -6,7 +6,8 @@ A full-stack MERN (MongoDB, Express, React, Node.js) healthcare application feat
 <img width="1597" height="778" alt="image" src="https://github.com/user-attachments/assets/a3701ed5-a48a-4f61-90ed-a3a933c9d0c6" />
 <img width="1509" height="755" alt="image" src="https://github.com/user-attachments/assets/ae71d891-4acb-4d41-8ece-f456309388a0" />
 <img width="1534" height="854" alt="image" src="https://github.com/user-attachments/assets/1fe114c3-4825-489e-b3df-e64a76bcd67b" />
-<img width="1544" height="731" alt="image" src="https://github.com/user-attachments/assets/57f5c447-4ba9-4c99-9bb9-ae9172ae0a58" />
+<img width="1180" height="665" alt="Screenshot 2026-01-16 at 8 34 09 AM" src="https://github.com/user-attachments/assets/e8ab699a-b99c-457d-8e00-e40ce0340c77" />
+<img width="1173" height="663" alt="Screenshot 2026-01-16 at 8 36 19 AM" src="https://github.com/user-attachments/assets/090c047c-5c91-4dd8-b4c9-10f2de6c5684" />
 <img width="1588" height="776" alt="image" src="https://github.com/user-attachments/assets/8dd30343-5cfa-4302-9075-855d81038d3a" />
 <img width="1601" height="727" alt="image" src="https://github.com/user-attachments/assets/88ea03f4-3031-4bce-84b1-2c86c625c5f6" />
 
